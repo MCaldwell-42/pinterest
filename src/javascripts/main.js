@@ -1,4 +1,9 @@
 import 'bootstrap';
 import '../styles/main.scss';
+import boards from './components/boards/boards';
 
-console.error('late night bullshit');
+const init = () => {
+  boards.initBoards();
+};
+
+init();
