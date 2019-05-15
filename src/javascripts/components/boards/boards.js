@@ -1,6 +1,7 @@
 import boardData from '../../helpers/data/boardsData';
 import pins from '../pins/pins';
 import util from '../../helpers/util';
+import pinsData from '../../helpers/data/pinsData';
 
 const seePinDiv = (e) => {
   const boardId = e.target.closest('.card').id;
@@ -25,7 +26,7 @@ const domStringBuilder = (boards) => {
     domString += `<div class="card p-2" id='${board.id}'>`;
     domString += '<div class="card-body">';
     domString += `<h5 class="card-title"> ${board.name} </h5>`;
-    domString += '<button class="btn btn-warning see-pins">Pins</button>';
+    domString += `<button class="btn btn-warning see-pins">${board.pins.length}Pins</button>`;
     domString += '</div>';
     domString += '</div>';
     domString += '</div>';
@@ -37,11 +38,11 @@ const domStringBuilder = (boards) => {
 
 const initBoards = () => {
   boardData.loadBoards()
-    .then((resp) => {
-      const boardsArray = resp.data.boards;
-      domStringBuilder(boardsArray);
+    .then(resp => pinsData.getPinsForEachBoard(resp.data.boards))
+    .then((boardsWithPins) => {
+      domStringBuilder(boardsWithPins);
     })
-    .catch(err => console.error('error from hell', err));
+    .catch(err => console.error('error from initBoards requests', err));
 };
 
 
