@@ -19,7 +19,7 @@ const domStringBuilder = (boards) => {
   let domString = '';
   domString += '<div class="container row">';
   boards.forEach((board) => {
-    domString += '<div class=col-3>';
+    domString += '<div class="col-3">';
     domString += `<div class="card p-2" id='${board.id}'>`;
     domString += '<div class="card-body">';
     domString += `<h5 class="card-title"> ${board.name} </h5>`;
